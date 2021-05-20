@@ -1,3 +1,6 @@
+//객체 간의 형변환
+//upcasting : sub class -> super class. 명시하지 않아도 사용 가능. 절대적
+//downcasting : super class -> sub class. 명시적 형변환 연산자를 사용해야 함
 #include <iostream>
 using namespace std;
 
