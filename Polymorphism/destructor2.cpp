@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 class Kvector
@@ -10,7 +11,7 @@ protected:
 public:
     Kvector(int sz = 0, int value = 0) : len(sz)
     {
-        cout << this << " : Kvector" << sz << "," << value << "} \n";
+        cout << this << " : Kvector(" << sz << "," << value << ") \n";
         if (!sz)
         {
             m = NULL;
@@ -22,7 +23,7 @@ public:
     }
     Kvector(const Kvector &v)
     {
-        cout << this << " : Kvector(*" << &v << "}\n";
+        cout << this << " : Kvector(*" << &v << ")\n";
         len = v.len;
         if (!len)
         {
@@ -37,6 +38,10 @@ public:
     {
         cout << this << " : ~Kvector() \n";
         delete[] m;
+    }
+    void print()
+    {
+        cout << endl;
     }
 };
 
@@ -79,7 +84,15 @@ public:
     }
 };
 
-int main()
+int main(int argc, char *argv[])
 {
+    Avector v(3, 1, "abc");
+    v.print();
+    Avector *p = new Avector(v);
+    p->print();
+    Kvector *kp = new Avector(2, 5, "xyz");
+    kp->print();
+    delete kp;
+    delete p;
     return 0;
 }
