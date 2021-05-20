@@ -1,3 +1,5 @@
+// virtual destructor
+// 생성자에서 동적할당을 하는 class
 #include <iostream>
 #include <cstring>
 using namespace std;
@@ -34,7 +36,7 @@ public:
         for (int i = 0; i < len; i++)
             m[i] = v.m[i];
     }
-    ~Kvector()
+    virtual ~Kvector()
     {
         cout << this << " : ~Kvector() \n";
         delete[] m;
@@ -92,7 +94,8 @@ int main(int argc, char *argv[])
     p->print();
     Kvector *kp = new Avector(2, 5, "xyz");
     kp->print();
-    delete kp;
-    delete p;
+    delete kp; //kvector destructo. virtual destructor로 선언하지 않으면, kvector만 destructor.
+    delete p;  //acvector destructor, kvector destructor
+               //acvector destructor, kvector destructor
     return 0;
 }
