@@ -13,10 +13,10 @@ class ChildClass2 : private ParentClass //private으로 상속 = 접근 지정�
 };
 
 class GrandChild1 : private ChildClass1
-{
+{ //private : x
 };
 class GrandChild2 : public ChildClass2
-{
+{ //x 접근이 불가능. 부모 클래스에서 x가 private으로 지정되었기 때문
 };
 int main()
 {
