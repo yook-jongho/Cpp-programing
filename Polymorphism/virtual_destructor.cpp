@@ -11,19 +11,19 @@ protected:
     int len;
 
 public:
-    Kvector(int sz = 0, int value = 0) : len(sz)
+    Kvector(int sz = 0, int value = 0) : len(sz) //Kvector 변수 len에 매개변수 sz값을 받아온다. 입력이 없으면 매개변수 sz, value는 0으로 초기화
     {
-        cout << this << " : Kvector(" << sz << "," << value << ") \n";
-        if (!sz)
+        cout << this << " : Kvector(" << sz << "," << value << ") \n"; //this는 Kvector 주소값
+        if (!sz)                                                       //sz가 0이면, 즉 false이면.
         {
-            m = NULL;
+            m = NULL; //m은 NULL
             return;
         }
-        m = new int[sz];
+        m = new int[sz]; //sz 크기만큼 배열 동적 할당
         for (int i = 0; i < sz; i++)
             m[i] = value;
     }
-    Kvector(const Kvector &v)
+    Kvector(const Kvector &v) //const kvector &v
     {
         cout << this << " : Kvector(*" << &v << ")\n";
         len = v.len;
@@ -94,8 +94,9 @@ int main(int argc, char *argv[])
     p->print();
     Kvector *kp = new Avector(2, 5, "xyz");
     kp->print();
-    delete kp; //kvector destructo. virtual destructor로 선언하지 않으면, kvector만 destructor.
+    delete kp; //kvector destructor. virtual destructor로 선언하지 않으면, kvector만 destructor.
     delete p;  //acvector destructor, kvector destructor
                //acvector destructor, kvector destructor
+
     return 0;
 }

@@ -17,7 +17,7 @@ public:
     }
     void draw()
     {
-        cout << "shape " << x << ", " << y;
+        cout << "shape " << x << ", " << y << endl;
     }
 };
 
@@ -31,7 +31,7 @@ public:
     void draw()
     {
         shape::draw();
-        cout << " rectangle : " << w << " x " << h;
+        cout << " rectangle : " << w << " x " << h << endl;
     }
 };
 
@@ -44,10 +44,10 @@ public:
     {
         radius = r;
     }
-    void draw()
+    void draw() //Overriding
     {
         shape::draw();
-        cout << " cricle : " << radius;
+        cout << " cricle : " << radius << endl;
     }
 };
 
@@ -62,6 +62,9 @@ int main()
     s.setOrigin(1, 2);
     s.draw();
 
+    //shape S = new shape(); // compile error. c++에선 동적할당 시, pointer 사용.
+    shape S = shape(); // 이렇게 선언하면 가능!
+
     //객체 포인터의 상향 형변환
     shape *se = new rectangle(); //shape형 포인터 변수 se가 객체 rectangle을 가르킴. => 상향형변환..?
     se->setOrigin(10, 10);
@@ -72,8 +75,8 @@ int main()
     sr->setwidth(100);
     sr->setheight(100);
     sr->setOrigin(100, 100);
-    sr->shape::draw(); //shape의 draw 호출
-    sr->draw();        //rectangle의 draw 호출
+    sr->shape::draw(); //shape의 draw 호출. 부모 class의 draw를 호출하겠다.
+    sr->draw();        //rectangle의 draw 호출. shape의 draw 호출 후, custom 메세지를 출력한다.
     cout << endl;
 
     rectangle r;
@@ -82,8 +85,7 @@ int main()
     r.draw();
     cout << endl;
 
-    shape *ps;
-    ps = &r; //shape형 포인터 변수 ps가 rectangle형 변수 r(rectangle)을 가르킨다. 상향형변환
+    shape *ps = &r; //shape형 포인터 변수 ps가 rectangle형 변수 r(rectangle)을 가르킨다. 상향형변환 == shape *ps = new rectangle();
     ps->setOrigin(10, 10);
     //ps.setwidth(100);  compile error
     ps->draw();
@@ -102,11 +104,14 @@ int main()
     pr->draw();
     cout << endl;
 
-    shape &S = r;
+    shape &S = r; // == Shape  *S = new rectangle();
     S.setOrigin(5, 5);
     //s.setwidth(7); compile error
     S.draw();
     cout << endl;
+
+    move(S, 10, 20);
+    S.draw();
 
     //rectangle& rr= (rectangle)s; compile error
     return 0;
